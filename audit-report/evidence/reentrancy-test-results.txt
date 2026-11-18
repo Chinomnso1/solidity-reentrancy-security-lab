@@ -1,0 +1,107 @@
+Compiling 25 files with Solc 0.8.38
+Solc 0.8.38 finished in 1.94s
+Compiler run successful!
+
+Ran 2 tests for test/ReentrancyTest.t.sol:ReentrancyTest
+[PASS] testReentrancyExploit() (gas: 196384)
+Traces:
+  [216284] ReentrancyTest::testReentrancyExploit()
+    ├─ [43601] VulnerableBank::deposit{value: 10000000000000000000}()
+    │   └─ ← [Stop]
+    ├─ [148405] ReentrancyAttacker::attack{value: 1000000000000000000}()
+    │   ├─ [22537] VulnerableBank::deposit{value: 1000000000000000000}()
+    │   │   └─ ← [Stop]
+    │   ├─ [92523] VulnerableBank::withdraw()
+    │   │   ├─ [84858] ReentrancyAttacker::receive{value: 1000000000000000000}()
+    │   │   │   ├─ [84069] VulnerableBank::withdraw()
+    │   │   │   │   ├─ [76404] ReentrancyAttacker::receive{value: 1000000000000000000}()
+    │   │   │   │   │   ├─ [75615] VulnerableBank::withdraw()
+    │   │   │   │   │   │   ├─ [67950] ReentrancyAttacker::receive{value: 1000000000000000000}()
+    │   │   │   │   │   │   │   ├─ [67161] VulnerableBank::withdraw()
+    │   │   │   │   │   │   │   │   ├─ [59496] ReentrancyAttacker::receive{value: 1000000000000000000}()
+    │   │   │   │   │   │   │   │   │   ├─ [58707] VulnerableBank::withdraw()
+    │   │   │   │   │   │   │   │   │   │   ├─ [51042] ReentrancyAttacker::receive{value: 1000000000000000000}()
+    │   │   │   │   │   │   │   │   │   │   │   ├─ [50253] VulnerableBank::withdraw()
+    │   │   │   │   │   │   │   │   │   │   │   │   ├─ [42588] ReentrancyAttacker::receive{value: 1000000000000000000}()
+    │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ [41799] VulnerableBank::withdraw()
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ [34134] ReentrancyAttacker::receive{value: 1000000000000000000}()
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ [33345] VulnerableBank::withdraw()
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ [25680] ReentrancyAttacker::receive{value: 1000000000000000000}()
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ [24891] VulnerableBank::withdraw()
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ [17226] ReentrancyAttacker::receive{value: 1000000000000000000}()
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ [16437] VulnerableBank::withdraw()
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ [8772] ReentrancyAttacker::receive{value: 1000000000000000000}()
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ [7983] VulnerableBank::withdraw()
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   ├─ [318] ReentrancyAttacker::receive{value: 1000000000000000000}()
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Stop]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Stop]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Stop]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Stop]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Stop]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Stop]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Stop]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Stop]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Stop]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Stop]
+    │   │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Stop]
+    │   │   │   │   │   │   │   │   │   │   │   │   └─ ← [Stop]
+    │   │   │   │   │   │   │   │   │   │   │   └─ ← [Stop]
+    │   │   │   │   │   │   │   │   │   │   └─ ← [Stop]
+    │   │   │   │   │   │   │   │   │   └─ ← [Stop]
+    │   │   │   │   │   │   │   │   └─ ← [Stop]
+    │   │   │   │   │   │   │   └─ ← [Stop]
+    │   │   │   │   │   │   └─ ← [Stop]
+    │   │   │   │   │   └─ ← [Stop]
+    │   │   │   │   └─ ← [Stop]
+    │   │   │   └─ ← [Stop]
+    │   │   └─ ← [Stop]
+    │   └─ ← [Stop]
+    └─ ← [Stop]
+
+[PASS] testSecureBankBlocksReentrancy() (gas: 454701)
+Traces:
+  [454701] ReentrancyTest::testSecureBankBlocksReentrancy()
+    ├─ [321908] VM::deployCode("src/ReentrancyAttacker.sol:ReentrancyAttacker", 0x0000000000000000000000002e234dae75c793f67a35089c9d99245e1c58470b)
+    │   ├─ [289828] → new ReentrancyAttacker@0x5991A2dF15A8F6A256D3Ec51E99254Cd3fb576A9
+    │   │   └─ ← [Return] 974 bytes of code
+    │   └─ ← [Return] ReentrancyAttacker: [0x5991A2dF15A8F6A256D3Ec51E99254Cd3fb576A9]
+    ├─ [43601] SecureBank::deposit{value: 10000000000000000000}()
+    │   └─ ← [Stop]
+    ├─ [0] VM::expectRevert(custom error 0xf4844814)
+    │   └─ ← [Return]
+    ├─ [65376] ReentrancyAttacker::attack{value: 1000000000000000000}()
+    │   ├─ [22537] SecureBank::deposit{value: 1000000000000000000}()
+    │   │   └─ ← [Stop]
+    │   ├─ [9487] SecureBank::withdraw()
+    │   │   ├─ [1449] ReentrancyAttacker::receive{value: 1000000000000000000}()
+    │   │   │   ├─ [645] SecureBank::withdraw()
+    │   │   │   │   └─ ← [Revert] No balance
+    │   │   │   └─ ← [Revert] No balance
+    │   │   └─ ← [Revert] Transfer failed
+    │   └─ ← [Revert] Transfer failed
+    └─ ← [Stop]
+
+Suite result: ok. 2 passed; 0 failed; 0 skipped; finished in 4.78ms (1.66ms CPU time)
+
+Ran 2 tests for test/Counter.t.sol:CounterTest
+[PASS] testFuzz_SetNumber(uint256) (runs: 256, μ: 51534, ~: 52589)
+Traces:
+  [52553] CounterTest::testFuzz_SetNumber(1000000000000000000 [1e18])
+    ├─ [43756] Counter::setNumber(1000000000000000000 [1e18])
+    │   └─ ← [Stop]
+    ├─ [2424] Counter::number() [staticcall]
+    │   └─ ← [Return] 1000000000000000000 [1e18]
+    └─ ← [Stop]
+
+[PASS] test_Increment() (gas: 51847)
+Traces:
+  [51847] CounterTest::test_Increment()
+    ├─ [43482] Counter::increment()
+    │   └─ ← [Stop]
+    ├─ [2424] Counter::number() [staticcall]
+    │   └─ ← [Return] 1
+    └─ ← [Stop]
+
+Suite result: ok. 2 passed; 0 failed; 0 skipped; finished in 44.87ms (42.06ms CPU time)
+
+Ran 2 test suites in 50.46ms (49.65ms CPU time): 4 tests passed, 0 failed, 0 skipped (4 total tests)

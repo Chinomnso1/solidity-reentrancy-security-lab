@@ -1,0 +1,22 @@
+Multiple frameworks detected: Foundry, solc, Solc-json. Using Foundry (highest priority). Use --compile-force-framework to override.
+'forge clean' running (wd: /home/kali/Web3-Security/labs/reentrancy)
+'forge config --json' running
+'forge build --build-info --deny never src/VulnerableBank.sol' running (wd: /home/kali/Web3-Security/labs/reentrancy)
+INFO:Detectors:
+Detector: reentrancy-eth
+Reentrancy in VulnerableBank.withdraw() (src/VulnerableBank.sol#11-21):
+	External calls:
+	- (success,None) = msg.sender.call{value: amount}() (src/VulnerableBank.sol#16)
+	State variables written after the call(s):
+	- balances[msg.sender] = 0 (src/VulnerableBank.sol#20)
+	VulnerableBank.balances (src/VulnerableBank.sol#5) can be used in cross function reentrancies:
+	- VulnerableBank.balances (src/VulnerableBank.sol#5)
+	- VulnerableBank.deposit() (src/VulnerableBank.sol#7-9)
+	- VulnerableBank.withdraw() (src/VulnerableBank.sol#11-21)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#reentrancy-vulnerabilities-1
+INFO:Detectors:
+Detector: low-level-calls
+Low level call in VulnerableBank.withdraw() (src/VulnerableBank.sol#11-21):
+	- (success,None) = msg.sender.call{value: amount}() (src/VulnerableBank.sol#16)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#low-level-calls
+INFO:Slither:src/VulnerableBank.sol analyzed (1 contracts with 102 detectors), 2 result(s) found
