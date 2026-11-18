@@ -16,9 +16,7 @@ contract ReentrancyTest is Test {
         vulnerableBank = new VulnerableBank();
         secureBank = new SecureBank();
 
-        attacker = new ReentrancyAttacker(
-            address(vulnerableBank)
-        );
+        attacker = new ReentrancyAttacker(address(vulnerableBank));
 
         vm.deal(address(this), 20 ether);
         vm.deal(address(attacker), 0);
@@ -37,22 +35,21 @@ contract ReentrancyTest is Test {
         assertEq(address(attacker).balance, 11 ether);
     }
 
-   function testSecureBankBlocksReentrancy() public {
-    // Deploy an attacker targeting the secure bank
-    ReentrancyAttacker secureAttacker =
-        new ReentrancyAttacker(address(secureBank));
+    function testSecureBankBlocksReentrancy() public {
+        // Deploy an attacker targeting the secure bank
+        ReentrancyAttacker secureAttacker = new ReentrancyAttacker(address(secureBank));
 
-    // Victim deposits 10 ETH
-    secureBank.deposit{value: 10 ether}();
+        // Victim deposits 10 ETH
+        secureBank.deposit{value: 10 ether}();
 
-    // Attacker attempts to deposit 1 ETH and drain the bank
-    vm.expectRevert();
-    secureAttacker.attack{value: 1 ether}();
+        // Attacker attempts to deposit 1 ETH and drain the bank
+        vm.expectRevert();
+        secureAttacker.attack{value: 1 ether}();
 
-    // The secure bank must retain the victim's 10 ETH
-    assertEq(address(secureBank).balance, 10 ether);
+        // The secure bank must retain the victim's 10 ETH
+        assertEq(address(secureBank).balance, 10 ether);
 
-    // Attacker's attempted transaction must have reverted
-    assertEq(address(secureAttacker).balance, 0);
-  }
+        // Attacker's attempted transaction must have reverted
+        assertEq(address(secureAttacker).balance, 0);
+    }
 }

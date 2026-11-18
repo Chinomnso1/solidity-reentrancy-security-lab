@@ -16,7 +16,7 @@ contract SecureBank {
         // Update state before external interaction
         balances[msg.sender] = 0;
 
-        (bool success, ) = msg.sender.call{value: amount}("");
+        (bool success,) = msg.sender.call{value: amount}("");
 
         require(success, "Transfer failed");
     }

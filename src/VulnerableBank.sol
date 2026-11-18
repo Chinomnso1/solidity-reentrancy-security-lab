@@ -13,7 +13,7 @@ contract VulnerableBank {
 
         require(amount > 0, "No balance");
 
-        (bool success, ) = msg.sender.call{value: amount}("");
+        (bool success,) = msg.sender.call{value: amount}("");
 
         require(success, "Transfer failed");
 
